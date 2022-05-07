@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+</head>
+<body>
+ 
+ 
+        id:<input type="text" id="_id">
+        name:<input type="text"  id="ename">
+        firstname:<input type="text"  id="elname">
+ 
+        <button onclick="addData()">ADD</button>
+        <button onclick="fetchData()">Fetch</button>
+        <script>
+            function addData(){
+            const emp={"_id":document.getElementById("_id").value,
+                        "empname":document.getElementById("ename").value,
+                        "firstname":document.getElementById("elname").value
+                       }
+                       fetch("http://localhost:3000/addemp",{method:"POST",headers:{
+       'content-type':'application/json'
+                       },
+                       body:JSON.stringify(emp)}
+                       ).then((res)=>{
+                           console.log(res);
+                       }).catch((err)=>console.log(err))
+        
+            }
+            function fetchData(){
+                fetch("http://localhost:3000/emps")
+                .then(response=>{
+        
+                   return response.json()
+                })
+                .then(data=>{
+             
+                console.log(data)
+        
+ 
+         });
+ 
+        }
+ </script>
+</body>
+</html>
