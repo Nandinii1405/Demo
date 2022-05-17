@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    
+    function fetchData(){
+           
+           fetch("http://localhost:2000/users")
+           .then((response)=>{
+              return  response.json()
+           })
+           .then(data=>{
+               var myTableDiv = document.getElementById("myDynamicTable");
+               var table = document.createElement('TABLE');
+               table.border='2';
+               var tableBody = document.createElement('TBODY');
+               table.appendChild(tableBody);
+               var tr = document.createElement('TR');
+               tableBody.appendChild(tr);
+               var td1 = document.createElement('TD');
+               td1.width='75';
+               td1.appendChild(document.createTextNode("Users"));
+               tr.appendChild(td1);
+               var td2 = document.createElement('TD');
+               td2.width='75';
+               td2.appendChild(document.createTextNode("password"));
+               tr.appendChild(td2);
+              
+               //console.log(data)
+               data.forEach(element => {
+                   tr = document.createElement('TR');
+                   td1 = document.createElement('TD');
+                   td1.appendChild(document.createTextNode(element.username))
+                   td2 = document.createElement('TD')
+                   td2.appendChild(document.createTextNode(element.password));
+                   tr.appendChild(td1);
+                   tr.appendChild(td2);
+                   tableBody.appendChild(tr)
+               });
+               myTableDiv.appendChild(table);
+           })
+       }
+
+       
+</script>
+</head>
+<body>
+    <div>
+        <button onclick="fetchData()">DATA</button>
+    <div id="myDynamicTable"></div>
+    
+</div>
+</body>
+</html>
