@@ -49,3 +49,13 @@ app.delete('/delusers/:id',(req,res)=>{
         res.send('user with id ${req.params.id} is not present')
     }
 })
+
+//app.delete('/deleteusers/:id',(req,res)=>{
+    const user=users.find(ele=>ele.id===parseInt(req.params.id))
+    if(user){
+      users.splice(req.params.id,1)
+      res.send("deleted.....")
+}
+else
+res.send("not found")
+})
