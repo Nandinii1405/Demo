@@ -1,0 +1,11 @@
+const { Console } = require('console');
+var os=require('os');
+console.log("Platform of OS : "+os.platform());
+console.log("Type of OS : "+os.type());
+console.log("Release Version :"+os.release());
+console.log("Architecture :"+os.arch());
+console.log("Total memory in bytes :"+os.totalmem());
+console.log("Free memory in bytes :"+os.freemem());
+console.log("System Uptime :"+os.uptime());
+var c=os.cpus();
+console.log("Number of CPUS is "+c.length);
