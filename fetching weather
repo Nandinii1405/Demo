@@ -1,0 +1,26 @@
+//weather.html
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="weather.js" type="text/javascript">
+    </script>
+    </head>
+    <body>
+        city:<input type="text" id="test"><br>
+        <input type="button" onclick="weather()" value="submit"><br>
+    </body>
+</html>
+
+
+//weather.js  
+
+
+async function weather(){
+    let cityname=document.getElementById("test");
+    let url="https://api.openweathermap.org/data/2.5/weather?q="+cityname.value+"&appid=cba3f1ce06894f087d7405df9be9767f&unit:metrics;"
+    const response=await fetch(url);
+    const data=await response.json();
+    let{main:{temp,humidity,pressure}}=data;
+    console.log("temperature:"+temp+"humidity:"+humidity+"pressure:"+pressure);
+}
