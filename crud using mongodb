@@ -1,0 +1,81 @@
+//mongo.js
+
+var http=require('http')
+//var jwt=require("jsonwebtoken")
+var express=require('express')
+var mongoClient=require('mongodb').MongoClient
+var app=express()
+//const{verify}=require("jsonwebtoken")
+app.use(express.json())
+mongoClient.connect('mongodb://localhost:27017',(err,client)=>{
+    if(err){
+        console.log("error")
+    }
+    else{
+        console.log("Successfully connected")
+        db=client.db('employee')
+       //d=client.d('userauthentication')
+    }
+})
+app.get('/emps',(req,res)=>{
+    db.collection('emp').find().toArray((err,items)=>{
+        console.log(items)
+        res.write(JSON.stringify(items))
+        res.end()
+    })
+})
+app.listen(2000,()=>{
+    console.log("server started at port 2000")
+})
+
+
+//app.post('/addusers',verifyToken,(req,res)=>{
+  //  res.send("adding post")
+//})
+
+//app.get("/getusers",verifyToken,(req,res)=>{
+  // res.send("this is testing page")
+//})
+
+
+
+
+
+app.post('/addemp',(req,res)=>{
+    console.log(req.body)
+    db.collection('emp').insertOne(req.body)
+   
+    res.end("inserted")
+})
+app.put("/update/:id",(req,res)=>{
+    var id=parseInt(req.params.id)
+    db.collection('emp').updateOne({"_id":id},{$set:{"salary":req.body.salary}})
+    res.end("updated")
+})
+app.delete("/delete/:id",(req,res)=>{
+    var id=parseInt(req.params.id)
+    db.collection('emp').deleteOne({_id:id})
+    res.end("deleted")
+})
+
+
+
+
+[
+   {
+      "name":"Andrea Le",
+      "_id":1,
+      "salary":1000,
+      "place":hyd
+   },
+   {
+   
+   
+   
+   
+   },
+   {
+      
+      
+   }
+]
